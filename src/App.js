@@ -7,7 +7,10 @@ function App() {
 
   const[posts,setPosts] = useState([]);
 
-  useEffect(()=>{});
+  useEffect(()=>{
+    fetch('https://jsonplaceholder.typicode.com/posts?_limit=10').then((response) => response.json)
+    .then((data) => {})
+  });
   return (
     <div className="App">
       <header className="App-header">
