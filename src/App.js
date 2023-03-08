@@ -16,7 +16,7 @@ function App() {
       <header className="App-header">
         <img src={redhatlogo} alt="redhat-logo"></img>
       </header>
-      <p> Hello World React Webapp for Azure devops demo</p>
+      <p> Hello World React Webapp for Azure devops demo Version 2.0</p>
     </div>
   );
 }
