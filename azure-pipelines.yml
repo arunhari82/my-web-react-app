@@ -20,11 +20,20 @@ variables:
    image_registry: default-route-openshift-image-registry.apps.cluster-5qzhx.5qzhx.sandbox1541.opentlc.com 
      
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+stages:
+  - stage: CI
+    displayName: CI Stage
+    jobs:
+      - job: build
+        displayName: build
+        steps:
+        - script: echo Hello, world!
+          displayName: 'Run a one-line script'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+        - script: |
+            echo Add other tasks to build, test, and deploy your project.
+            echo See https://aka.ms/yaml
+          displayName: 'Run a multi-line script'
+
+
+          
