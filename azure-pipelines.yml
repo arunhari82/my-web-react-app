@@ -9,6 +9,17 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+variables:
+   # Project Namespace in openshift for dev environment
+   namespace_dev: dev-env
+   # Project Namespace in openshift for dev environment
+   namespace_prod: prod-env
+   # Application name that needs to be deployed
+   application_name: myreactwebapp
+   # The above image registry comes from default-route of openshift internal registry
+   image_registry: default-route-openshift-image-registry.apps.cluster-5qzhx.5qzhx.sandbox1541.opentlc.com 
+     
+
 steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
