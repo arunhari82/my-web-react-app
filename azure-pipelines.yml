@@ -39,7 +39,7 @@ stages:
               inputs:
                 connectionType: 'OpenShift Connection Service'
                 openshiftService: 'Openshift Connection'
-                cmd: 'oc new-build $(Build.Repository.Uri) --name(application_name) -n $(namespace_dev) -l app=$(application_name)'
+                cmd: 'oc new-build $(Build.Repository.Uri) --name $(application_name) -n $(namespace_dev) -l app=$(application_name)'
                 ignoreFlag: true
   - stage: CD
     displayName: CD Stage
