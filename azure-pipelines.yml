@@ -39,8 +39,22 @@ stages:
               inputs:
                 connectionType: 'OpenShift Connection Service'
                 openshiftService: 'Openshift Connection'
-                cmd: 'oc new-build $(Build.Repository.Uri) -n $(namespace_dev)'
+                cmd: 'oc new-build $(Build.Repository.Uri) -n $(namespace_dev) -l app=$(application_name)'
                 ignoreFlag: true
+  - stage: CD
+    displayName: CD Stage
+    jobs:
+      - job: deploy
+        displayName: deploy
+        steps:
+           - task: oc-cmd@3
+             displayName: Deploy to Dev environemnt
+             inputs:
+               connectionType: 'OpenShift Connection Service'
+               openshiftService: 'Openshift Connection'
+               cmd: 'oc new-app --image $(image_registry)/$(namespace_dev)/$(Build.Repository.Name):latest'
+                
+            
 
 
           
