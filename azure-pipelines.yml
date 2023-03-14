@@ -52,7 +52,7 @@ stages:
              inputs:
                connectionType: 'OpenShift Connection Service'
                openshiftService: 'Openshift Connection'
-               cmd: 'oc new-app --image-stream $(application_name) -n $(namespace_dev) -l app=$(application_name)'
+               cmd: 'oc new-app --image-stream $(application_name):latest -n $(namespace_dev) -l app=$(application_name)'
                 
             
 
