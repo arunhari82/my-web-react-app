@@ -27,6 +27,7 @@ stages:
       - job: build
         displayName: build
         steps:
+            
             - task: oc-cmd@3
               displayName: Create Dev openshift Project
               inputs:
@@ -34,13 +35,19 @@ stages:
                 openshiftService: 'Openshift Connection'
                 cmd: 'oc new-project dev-env'
                 ignoreFlag: true
-            - task: oc-cmd@3
+            
+            - task: Bash@3
               displayName: Start the build 
               inputs:
-                connectionType: 'OpenShift Connection Service'
-                openshiftService: 'Openshift Connection'
-                cmd: 'oc new-build $(Build.Repository.Uri) --name $(application_name) -n $(namespace_dev) -l app=$(application_name)'
-                ignoreFlag: true
+                targetType: 'inline'
+                script: |
+                  oc get bc ${application_name} -n ${namespace_dev}
+                  if [ $? !=0 ]; then
+                      oc new-build ${Build.Repository.Uri} --name ${application_name} -n ${namespace_dev} -l app=${application_name}
+                  else
+                     oc start-build ${application_name}
+                  fi
+            
   - stage: CD
     displayName: CD Stage
     jobs:
