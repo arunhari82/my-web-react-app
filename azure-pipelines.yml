@@ -48,12 +48,17 @@ stages:
         displayName: deploy
         steps:
            - task: oc-cmd@3
-             displayName: Deploy to Dev environemnt
+             displayName: Deploy to Dev environment
              inputs:
                connectionType: 'OpenShift Connection Service'
                openshiftService: 'Openshift Connection'
                cmd: 'oc new-app --image-stream $(application_name):latest -n $(namespace_dev) -l app=$(application_name)'
-                
+           - task: oc-cmd@3
+             displayName: Expose the service as Route
+             inputs:
+               connectionType: 'OpenShift Connection Service'
+               openshiftService: 'Openshift Connection'
+               cmd: 'oc expose svc/$(application_name)'
             
 
 
