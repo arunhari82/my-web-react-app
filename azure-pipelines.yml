@@ -39,7 +39,7 @@ stages:
               inputs:
                 connectionType: 'OpenShift Connection Service'
                 openshiftService: 'Openshift Connection'
-                cmd: 'oc new-build $(Build.Repository.Uri}'
+                cmd: 'oc new-build $(Build.Repository.Uri)'
 
 
           
