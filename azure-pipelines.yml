@@ -41,11 +41,11 @@ stages:
               inputs:
                 targetType: 'inline'
                 script: |
-                  oc get bc ${application_name} -n ${namespace_dev}
+                  oc get bc $(application_name) -n $(namespace_dev)
                   if [ $? !=0 ]; then
-                      oc new-build ${Build.Repository.Uri} --name ${application_name} -n ${namespace_dev} -l app=${application_name}
+                      oc new-build $(Build.Repository.Uri) --name $(application_name) -n $(namespace_dev) -l app=$(application_name)
                   else
-                     oc start-build ${application_name}
+                     oc start-build $(application_name)
                   fi
             
   - stage: CD
