@@ -18,7 +18,7 @@ variables:
    application_name: myreactwebapp
    # The above image registry comes from default-route of openshift internal registry
    image_registry: default-route-openshift-image-registry.apps.cluster-5qzhx.5qzhx.sandbox1541.opentlc.com 
-     
+
 
 stages:
   - stage: CI
@@ -27,13 +27,19 @@ stages:
       - job: build
         displayName: build
         steps:
-        - script: echo Hello, world!
-          displayName: 'Run a one-line script'
-
-        - script: |
-            echo Add other tasks to build, test, and deploy your project.
-            echo See https://aka.ms/yaml
-          displayName: 'Run a multi-line script'
+            - task: oc-cmd@3
+              displayName: Create Dev openshift Project
+              inputs:
+                connectionType: 'OpenShift Connection Service'
+                openshiftService: 'Openshift Connection'
+                cmd: 'oc new-project dev-env'
+                ignoreFlag: true
+            - task: oc-cmd@3
+              displayName: Start the build 
+              inputs:
+                connectionType: 'OpenShift Connection Service'
+                openshiftService: 'Openshift Connection'
+                cmd: 'oc new-build .'
 
 
           
