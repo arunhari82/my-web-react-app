@@ -42,7 +42,7 @@ stages:
                 targetType: 'inline'
                 script: |
                   oc get bc $(application_name) -n $(namespace_dev)
-                  if [ $? !=0 ]; then
+                  if [ $? -gt 0 ]; then
                       oc new-build $(Build.Repository.Uri) --name $(application_name) -n $(namespace_dev) -l app=$(application_name)
                   else
                      oc start-build $(application_name)
