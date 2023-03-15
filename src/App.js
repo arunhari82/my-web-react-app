@@ -15,7 +15,7 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    fetch('http://nodebackendservice:8080/products').then((response) => response.json())
+    fetch('http://nodebackendservice.dev-env.svc.cluster.local:8080/products').then((response) => response.json())
       .then((data) => {
         console.log(data);
         setIsLoaded(true);
