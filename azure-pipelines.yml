@@ -45,6 +45,7 @@ stages:
                   if [ $? -gt 0 ]; then
                       oc new-build $(Build.Repository.Uri) --name $(application_name) -n $(namespace_dev) -l app=$(application_name)
                   else
+                     # This build will automatically trigger deployment.
                      oc start-build $(application_name)
                   fi
             
@@ -54,12 +55,16 @@ stages:
       - job: deploy
         displayName: deploy
         steps:
-           - task: oc-cmd@3
-             displayName: Deploy to Dev environment
+           - task: Bash@3
+             displayName: 
              inputs:
-               connectionType: 'OpenShift Connection Service'
-               openshiftService: 'Openshift Connection'
-               cmd: 'oc new-app --image-stream $(application_name):latest -n $(namespace_dev) -l app=$(application_name)'
+               targetType: 'inline'
+               script: |
+                 # Write your commands here
+                 oc get dc $(application_name) -n $(namespace_dev)
+                 if [ $? -gt 0 ];then
+                     oc new-app --image-stream $(application_name):latest -n $(namespace_dev) -l app=$(application_name)
+                 fi
            - task: oc-cmd@3
              displayName: Expose the service as Route
              inputs:
