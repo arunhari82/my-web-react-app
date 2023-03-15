@@ -46,7 +46,7 @@ stages:
                       oc new-build $(Build.Repository.Uri) --name $(application_name) -n $(namespace_dev) -l app=$(application_name)
                   else
                      # This build will automatically trigger deployment.
-                     oc start-build $(application_name)
+                     oc start-build $(application_name) -n $(namespace_dev)
                   fi
             
   - stage: CD
