@@ -80,7 +80,7 @@ stages:
                targetType: 'inline'
                script: |
                  oc get route $(application_name) -n $(namespace_dev)
-                 if[ $? -gt 0 ];then
+                 if [ $? -gt 0 ];then
                     oc expose svc/$(application_name) -n $(namespace_dev)
                  fi
             
