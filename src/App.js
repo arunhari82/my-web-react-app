@@ -57,7 +57,7 @@ function App() {
             />
           </Navbar.Brand>
           <Navbar.Text className="justify-content-center">
-             Azure Devops Pipeline Demo
+             Azure Devops Pipeline Demo Version 1.0
           </Navbar.Text>
           <Navbar.Collapse className="justify-content-end">
           
