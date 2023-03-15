@@ -73,12 +73,16 @@ stages:
                  if [ $? -gt 0 ];then
                      oc new-app --image-stream $(application_name):latest -n $(namespace_dev) -l app=$(application_name)
                  fi
-           - task: oc-cmd@3
+
+           - task: Bash@3
              displayName: Expose the service as Route
              inputs:
-               connectionType: 'OpenShift Connection Service'
-               openshiftService: 'Openshift Connection'
-               cmd: 'oc expose svc/$(application_name)'
+               targetType: 'inline'
+               script: |
+                 oc get route $(application_name) -n $(namespace_dev)
+                 if[ $? -gt 0 ];then
+                    oc expose svc/$(application_name) -n $(namespace_dev)
+                 fi
             
 
 
