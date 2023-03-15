@@ -69,7 +69,7 @@ stages:
                targetType: 'inline'
                script: |
                  # Write your commands here
-                 oc get dc $(application_name) -n $(namespace_dev)
+                 oc get deployment $(application_name) -n $(namespace_dev)
                  if [ $? -gt 0 ];then
                      oc new-app --image-stream $(application_name):latest -n $(namespace_dev) -l app=$(application_name)
                  fi
