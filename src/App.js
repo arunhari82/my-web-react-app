@@ -15,7 +15,7 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    fetch('http://localhost:4500/products').then((response) => response.json())
+    fetch('http://nodebackendservice:8080/products').then((response) => response.json())
       .then((data) => {
         console.log(data);
         setIsLoaded(true);
