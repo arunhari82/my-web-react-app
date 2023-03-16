@@ -7,7 +7,9 @@ trigger:
 - main
 
 pool:
- vmImage: ubuntu-latest
+ #vmImage: ubuntu-latest
+ name: "openshift Agent Pool"
+
 
 variables:
    # Project Namespace in openshift for dev environment
