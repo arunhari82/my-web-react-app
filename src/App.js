@@ -38,11 +38,11 @@ function App() {
         <tr>
           <th>Id</th>
           <th>Name</th>
-          <th>Test</th>
+         
         </tr>
       </thead>
       <tbody>
-        {products.map((item, index) => { return <tr key={item.id}><td>{item.id}</td><td>{item.name}</td><td>Code Change Demo</td></tr> })}
+        {products.map((item, index) => { return <tr key={item.id}><td>{item.id}</td><td>{item.name}</td></tr> })}
       </tbody>
     </Table>;
   }
