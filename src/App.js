@@ -15,7 +15,7 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    fetch('https://backendnodeservice-dev-env.apps.cluster-66pdf.66pdf.sandbox2818.opentlc.com/products').then((response) => response.json())
+    fetch('https://backendnodeservice-dev-env.apps.cluster-g6j54.g6j54.sandbox2065.opentlc.com/products').then((response) => response.json())
       .then((data) => {
         console.log(data);
         setIsLoaded(true);
