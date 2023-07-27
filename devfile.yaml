@@ -1,0 +1,63 @@
+schemaVersion: 2.1.0
+metadata:
+  name: nodejs-react
+  # displayName: React
+  # description: "React is a free and open-source front-end JavaScript library for building user interfaces based on UI components.
+  #  It is maintained by Meta and a community of individual developers and companies."
+  # icon: https://raw.githubusercontent.com/devfile-samples/devfile-stack-icons/main/react.svg
+  # tags:
+   # - Node.js
+   # - React
+  # projectType: React
+  # language: TypeScript
+  # provider: Red Hat
+  # version: 2.0.2
+# starterProjects:
+  # - name: nodejs-react-starter
+    #git:
+      # checkoutFrom:
+       # revision: main
+      #remotes:
+        #origin: https://github.com/devfile-samples/devfile-stacks-nodejs-react.git
+components:
+  - name: tools
+    container:
+      # image: quay.io/redhat_na_ssa/universal-developer-image:ubi8-latest # our fork - 2.0GB compressed
+      image: quay.io/devfile/universal-developer-image@sha256:80fdd1ae37d3b9e0260d9c66b4ff12e35317c31243eabeea5212d98c537a3ba9 # upstream - 3.7GB compressed
+      # image: registry.redhat.io/devspaces/udi-rhel8:latest #1.7GB compressed
+      volumeMounts:
+        - name: m2
+          path: /home/user/.m2
+      memoryLimit: 6Gi
+      memoryRequest: 1Gi
+      cpuRequest: '1'
+      cpuLimit: '3'
+      mountSources: true
+      image: registry.redhat.io/devspaces/udi-rhel8:latest
+
+  - name: runtime
+    container:
+      endpoints:
+        - name: http-react
+          targetPort: 3000
+      image: registry.access.redhat.com/ubi8/nodejs-16:1-105.1684740145
+      args: ['tail', '-f', '/dev/null']
+      memoryLimit: 1024Mi
+    
+commands:
+  - exec:
+      commandLine: npm install
+      component: tools
+      group:
+        isDefault: true
+        kind: build
+      workingDir: ${PROJECT_SOURCE}
+    id: install
+  - exec:
+      commandLine: npm run dev
+      component: tools
+      group:
+        isDefault: true
+        kind: run
+      workingDir: ${PROJECT_SOURCE}
+    id: run
