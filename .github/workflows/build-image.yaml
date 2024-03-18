@@ -28,7 +28,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ${{ secrets.QUAY_USERNAME }}/my-web-react-app:${GIT_SHA}
+          tags: anattama/my-web-react-app:${GIT_SHA}
           file: ./Dockerfile
   
   
