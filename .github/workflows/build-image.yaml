@@ -52,6 +52,7 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           repository: arunhari82/my-web-react-app-gitops
+          github_token: ${{ secrets.MANIFEST_REPO_PAT }}
             
   
   
