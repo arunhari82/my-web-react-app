@@ -7,6 +7,8 @@ on:
 jobs:
   build-image:
     runs-on: ubuntu-latest
+    env:
+      commitmsg: ${{ github.event.head_commit.message }}
     steps:
       - name: Set environment variables
         run: |
@@ -44,14 +46,13 @@ jobs:
            sed -e 's/\(.*tag:\) \(.*\)/\1 ${{ env.GIT_SHA }}/g' ./helm/app/values.yaml > ./helm/app/values.yaml.temp
            rm ./helm/app/values.yaml
            mv ./helm/app/values.yaml.temp ./helm/app/values.yaml
-           cat ./helm/app/values.yaml
     
       - name: Commit files # transfer the new html files back into the repository
         run: |
           git config --local user.email "73549783+arunhari82@users.noreply.github.com"
           git config --local user.name "arunhari82"
           git add ./helm/app/values.yaml
-          git commit -m "Updating the repository with newer release with commit - ${{ env.GIT_SHA }}"  
+          git commit -m "${{ env.GIT_SHA }} - ${{env.commitmsg}}"  
       
       - name: Push changes to Manifest Repo # push the output folder to your repo
         uses: ad-m/github-push-action@master
