@@ -40,7 +40,10 @@ jobs:
 
       - name: Update Image Signature
         shell: bash
-        run: sed -e 's/\(.*tag:\) \(.*\)/\1 ${{ env.GIT_SHA }}/g' ./helm/app/values.yaml > ./helm/app/values.yaml
+        run: |
+           sed -e 's/\(.*tag:\) \(.*\)/\1 ${{ env.GIT_SHA }}/g' ./helm/app/values.yaml > ./helm/app/values.yaml.temp
+           rm ./helm/app/values.yaml
+           mv ./helm/app/values.yaml.temp ./helm/app/values.yaml
 
     
       - name: Commit files # transfer the new html files back into the repository
