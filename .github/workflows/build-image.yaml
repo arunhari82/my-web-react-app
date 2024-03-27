@@ -45,7 +45,7 @@ jobs:
     
       - name: Commit files # transfer the new html files back into the repository
         run: |
-          git config --local user.email "anattama@redhat.com"
+          git config --local user.email "arunkumar.nh@gmail.com"
           git config --local user.name "arunhari82"
           git add ./helm/app/values.yaml
           git commit -m "Updating the repository with newer release with commit - ${{ env.GIT_SHA }}"  
