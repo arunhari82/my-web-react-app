@@ -1,6 +1,5 @@
 import logo from './logo.svg';
 import redhatlogo from "./Redhat.svg"
-import charlesriver from "./CharlesRiver.svg"
 import './App.css';
 import { useState, useEffect } from 'react';
 import Table from 'react-bootstrap/Table';
