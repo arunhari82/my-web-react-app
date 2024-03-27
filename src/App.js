@@ -57,7 +57,7 @@ function App() {
             />
           </Navbar.Brand>
           <Navbar.Text className="justify-content-center">
-             Github Actions Demo Version 2.0
+             Github Actions Demo Version 3.0
           </Navbar.Text>
           <Navbar.Collapse className="justify-content-end">
           
