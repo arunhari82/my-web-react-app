@@ -35,6 +35,8 @@ jobs:
         uses: actions/checkout@v4  
         with:
           repository: arunhari82/my-web-react-app-gitops
+          token: ${{ secrets.MANIFEST_REPO_PAT }}
+          persist-credentials: true
 
       - name: Update Image Signature
         shell: bash
