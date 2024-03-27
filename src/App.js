@@ -58,18 +58,18 @@ function App() {
             />
           </Navbar.Brand>
           <Navbar.Text className="justify-content-center">
-             Azure Devops Pipeline Demo Version 1.0
+             Github Actions Demo Version 1.0
           </Navbar.Text>
           <Navbar.Collapse className="justify-content-end">
           
-            <Navbar.Brand href="#main" class="navbar-right">
+           /* <Navbar.Brand href="#main" class="navbar-right">
               <img
                 src={charlesriver}
                 width="200"
                 height="50"
                 className="d-inline-block align-top"
                 alt="React Bootstrap logo"
-              />
+              /> */
             </Navbar.Brand>
           </Navbar.Collapse>
 
@@ -77,8 +77,8 @@ function App() {
 
         </Container>
       </Navbar>
-      <h2> Product and Services List </h2>
-      {loadedContent}
+     /* <h2> Product and Services List </h2>
+      {loadedContent} */
     </div>
   );
 }
