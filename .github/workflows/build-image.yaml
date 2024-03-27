@@ -30,5 +30,24 @@ jobs:
           push: true
           tags:  ${{ secrets.QUAY_URL }}/anattama/my-web-react-app:${{ env.GIT_SHA }}
           file: ./Dockerfile
+
+      - name: Checkout Manifest Repo
+        uses: actions/checkout@v4  
+        with:
+          repository: arunhari82/my-web-react-app-gitops
+
+      - name: Update Image Signature
+        shell: bash
+        run: sed -e s/\(.*tag:\) \(.*\)/\1 ${{ env.GIT_SHA }}/g ./helm/app/values.yaml > ./helm/app/values.yaml
+
+    
+      - name: Commit files # transfer the new html files back into the repository
+        run: |
+          git add ./helm/app/values.yaml
+          git commit -m "Updating the repository with newer release with commit - ${{ env.GIT_SHA }}"  
+      
+      - name: Push changes to Manifest Repo # push the output folder to your repo
+        uses: ad-m/github-push-action@master    
+            
   
   
