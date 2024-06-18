@@ -75,7 +75,7 @@ stages:
               targetType: inline
               script: |    
                  git commit -m 'Updating Git Repo with image SHA : $(GIT_SHA)'
-                 git push origin main
+                 git push origin HEAD:main
                  
                         
 
