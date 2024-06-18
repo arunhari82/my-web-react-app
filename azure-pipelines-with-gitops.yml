@@ -8,6 +8,13 @@
 trigger:
 - main
 
+resources:
+ repositories:
+   - repository: my-web-react-app-gitops
+     type: github
+     endpoint: arunhari82
+     name: arunhari82/my-web-react-app-gitops
+
 pool:
   vmImage: ubuntu-latest
 
@@ -35,6 +42,42 @@ stages:
             command: 'buildAndPush'
             Dockerfile: '**/Dockerfile'
             tags: $(GIT_SHA)
+  - stage: CD
+    displayName: Update the Gitops Repo
+    jobs:
+      - job: deploy
+        displayName: Update Gitops Repo
+        steps:
+        
+          - checkout: my-web-react-app-gitops
+            displayName: Checkout Gitops Repository
+            persistCredentials: true
+          - task: Bash@3
+            displayName: Update image SHA signature
+            inputs:
+              targetType: inline
+              script: |
+                 sed -e 's/\(.*tag:\) \(.*\)/\1 $(GIT_SHA)/g' ./helm/app/values.yaml > ./helm/app/values.yaml.temp
+                 rm ./helm/app/values.yaml
+                 mv ./helm/app/values.yaml.temp ./helm/app/values.yaml
+          - task: Bash@3
+            displayName: Configure Git
+            inputs:
+              targetType: inline
+              script: |       
+                 git config --local user.email "73549783+arunhari82@users.noreply.github.com"
+                 git config --local user.name "arunhari82"
+                 git add ./helm/app/values.yaml
+               
+          - task: Bash@3
+            displayName: Commit and Push Gitops
+            inputs:
+              targetType: inline
+              script: |    
+                 git commit -m 'Updating Git Repo with image SHA : $(GIT_SHA)'
+                 git push origin main
+                 
+                        
 
 
   
