@@ -17,6 +17,11 @@ stages:
       - job: build
         displayName: build
         steps:
+        
+        - task: Docker@2
+          inputs:
+            containerRegistry: 'quay-container-registry'
+            command: 'login'
         - task: Docker@2
           inputs:
             containerRegistry: 'quay-container-registry'
