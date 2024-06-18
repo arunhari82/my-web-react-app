@@ -30,9 +30,10 @@ stages:
         - task: Docker@2
           inputs:
             containerRegistry: 'quay-container-registry'
-            repository: 'anattama/my-web-react-app:$(GIT_SHA)'
+            repository: 'anattama/my-web-react-app'
             command: 'buildAndPush'
             Dockerfile: '**/Dockerfile'
+            tags: $(GIT_SHA)
 
 
   
