@@ -28,6 +28,7 @@ stages:
             containerRegistry: 'quay-container-registry'
             command: 'login'
         - task: Docker@2
+          displayName: Build and Push
           inputs:
             containerRegistry: 'quay-container-registry'
             repository: 'anattama/my-web-react-app'
