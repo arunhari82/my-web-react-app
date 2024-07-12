@@ -62,6 +62,11 @@ stages:
       - job: deploy
         displayName: deploy
         steps:
+           - task: oc-setup@3
+              inputs:
+                connectionType: 'OpenShift Connection Service'
+                openshiftService: 'Openshift Connection'
+                
            - task: oc-cmd@3
              displayName: Use Dev Project
              inputs:
