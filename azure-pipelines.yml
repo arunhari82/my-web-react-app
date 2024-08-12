@@ -63,7 +63,7 @@ stages:
         displayName: deploy
         steps:
            - task: oc-setup@3
-              inputs:
+             inputs: 
                 connectionType: 'OpenShift Connection Service'
                 openshiftService: 'Openshift Connection'
                 
