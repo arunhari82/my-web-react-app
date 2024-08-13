@@ -5,6 +5,7 @@
 # https://aka.ms/yaml
 
 
+
 trigger:
 - main
 
@@ -16,7 +17,8 @@ resources:
      name: arunhari82/my-web-react-app-gitops
 
 pool:
-  vmImage: ubuntu-latest
+  #vmImage: ubuntu-latest
+  name: "openshift Agent Pool"
 
 variables:
   GIT_SHA: $(Build.SourceVersion)
