@@ -7,8 +7,8 @@ trigger:
 - main
 
 pool:
- vmImage: ubuntu-latest
- #name: "openshift Agent Pool"
+ #vmImage: ubuntu-latest
+ name: "openshift Agent Pool"
 
 
 variables:
